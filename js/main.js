@@ -71,3 +71,6 @@ document.querySelectorAll(".game-cell").forEach((element) => {
 });
 
 console.log(gameCellsIds);
+
+// * the paramter player-1 inside the choosenCell is hardcoded for testing purpose but it should be dynacmic. That means refactoring and using a variable, turning the anon arrow function into a proper one and passing a paramater,
+// using a methord, switching with a loop...plenty of Options.
