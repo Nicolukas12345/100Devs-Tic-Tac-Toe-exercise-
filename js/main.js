@@ -10,6 +10,8 @@ console.log("main script working");
 // Check winning condition (when a player gets the 3 cells).
 
 // My first idea was using the gameCellsIds array and replace the array elements (each cell)
+/*Added to keep track of the updated cells*/
+let board = ["cell-0", "cell-1", "cell-2", "cell-3", "cell-4", "cell-5", "cell-6", "cell-7", "cell-8"]
 
 // Array(9) [ "cell-0", "cell-1", "cell-2", "cell-3", "cell-4", "cell-5", "cell-6", "cell-7", "cell-8" ]
 
@@ -33,6 +35,9 @@ class Cell {
   }
   makeMove() {
     console.log(`A new piece was put on square ${this.position} by ${this.player}`);
+    /*Added this to update the baord array when new cells are clicked*/
+    board[board.findIndex(element => element === `cell-${this.position}`)] = this.player;
+    console.log (`This is the board ${board}`)
   }
 }
 
