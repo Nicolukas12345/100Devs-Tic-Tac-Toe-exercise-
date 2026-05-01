@@ -127,7 +127,8 @@ document.querySelectorAll(".game-cell").forEach((element) => {
 
 // This works by using the global variable let gameBeingPlayed = true; in a while loop. The while loop switches between 2 states determined byt 2 other global variables
 // let playerOneTurn = true; and // let playerTwoTurn = false; and alternates between them. While one of the if statements is true, it runs, and at then end, it becames false and changes
-// the toogles the other variable ( basically working like a true/false switch)
+// the toogles the other variable ( basically working like a true/false switch). The while (gameBeingPlayed === true) is an defacto infinity loop and runs as long as its condition is true but the idea is
+// it should be very easy to exit with a simple if statement like: if the winning condition for a player is true => gameBeingPlayed === false === break out of the loop
 
 // let playerOneTurn = true;
 // let playerTwoTurn = false;
