@@ -9,7 +9,6 @@ console.log("main script working");
 // OOP requirements
 // Check winning condition (when a player gets the 3 cells).
 
-// My first idea was using the gameCellsIds array and replace the array elements (each cell)
 /*Added to keep track of the updated cells*/
 let board = ["cell-0", "cell-1", "cell-2", "cell-3", "cell-4", "cell-5", "cell-6", "cell-7", "cell-8"];
 
@@ -82,35 +81,43 @@ class Player {
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Main code logic for now, kinda works but is not finnal at all, only on the frontend,
-// Allows you to click on of the cells divs from the html  updates the DOM and creates a cell object but thats abaout it,
-// there is no backend game logic that save that state and/or make use of it
-// Still lacks all the logic (winning condition, game loop, switch between players,etc) Not sure how should i tackle that for now
+// Added 2 buttons, each with its own eventListener (altought the reset is just a placeholder for now). The Logic should be easy to implement in the future
+// Now the main logic of the game is contained inside the gameInit() function and its only trigger when the player press "Start"
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-document.querySelectorAll(".game-cell").forEach((element) => {
-  element.addEventListener("click", () => {
-    // checks if its working on the console, debugging purpose
-    console.log(`clicked on ${element.id}`);
-    // gets the id number
-    let idNumber = element.id[element.id.length - 1];
-    // creates player Object and picks the cell after clicking on it on the DOM. This right now is hardcoded because there is no switching between players states logic
-    const player1 = new Player(
-      players[turn % players.length][0],
-      players[turn % players.length][1],
-    ); /*Replaced player1 and x for array of players created earlier, turn will change and shift the array and wrap around once it exceeds its length*/
-    turn += 1; /*to shift player array*/
-    player1.createCell(true, idNumber);
-    player1.checkWinCon();
-    // debuggin if its returning true
-    // console.log(player1.checkWinCon());
-    //
-    // Updates the chosen cell on the DOM
-    document.getElementById(`cell-${idNumber}`).innerText = player1.symbol;
-  });
+// On page load, this waits for a click in order to start the game
+document.getElementById("game-start-button").addEventListener("click", () => {
+  console.log("Game starts");
+  gameInit();
 });
 
-// console.log(gameCellsIds);
+document.getElementById("game-reset-button").addEventListener("click", () => {
+  console.log("Game resets but there is no logic yet");
+});
+
+function gameInit() {
+  document.querySelectorAll(".game-cell").forEach((element) => {
+    element.addEventListener("click", () => {
+      // checks if its working on the console, debugging purpose
+      console.log(`clicked on ${element.id}`);
+      // gets the id number
+      let idNumber = element.id[element.id.length - 1];
+      // creates player Object and picks the cell after clicking on it on the DOM. This right now is hardcoded because there is no switching between players states logic
+      const player1 = new Player(
+        players[turn % players.length][0],
+        players[turn % players.length][1],
+      ); /*Replaced player1 and x for array of players created earlier, turn will change and shift the array and wrap around once it exceeds its length*/
+      turn += 1; /*to shift player array*/
+      player1.createCell(true, idNumber);
+      player1.checkWinCon();
+      // debuggin if its returning true
+      // console.log(player1.checkWinCon());
+      //
+      // Updates the chosen cell on the DOM
+      document.getElementById(`cell-${idNumber}`).innerText = player1.symbol;
+    });
+  });
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // This right now does nothing usefull to the actual project.
@@ -150,7 +157,7 @@ document.querySelectorAll(".game-cell").forEach((element) => {
 //
 //
 
-// FOR FUTURE REFACTORING DO NOT DELETE
+// FOR POTENTIAL FUTURE REFACTORING DO NOT DELETE
 
 ///////////////////////////////////////////////////
 // SWITCHING BETWEEN PLAYERS LOGIC PROTOTYPE
