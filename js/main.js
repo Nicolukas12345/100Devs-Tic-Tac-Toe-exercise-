@@ -13,6 +13,13 @@ console.log("main script working");
 /*Added to keep track of the updated cells*/
 let board = ["cell-0", "cell-1", "cell-2", "cell-3", "cell-4", "cell-5", "cell-6", "cell-7", "cell-8"];
 
+//Introduced to keep track of the turn but alsoto switch between players, I think it will also be helpful for declaring a stalemate since I am pretty sure after 9 turns if no one has won the game its supposed to start over.
+let turn = 0;
+//This is just to list the players and their symbols, this will be used to feed to the player object as arguments.
+let players = [["player1", "X"], ["player2", "O"]];
+
+
+
 // This let playerWins = false; for now works as a global variable to determine the outcome of thw switch statement inside checkWinCon()
 // but is unnecesary (and kind of reduntand) and could be replaced byt simply using a return true inside the switch
 // I think its use depends on which kind logic we end up using for the switching between players, but its is posible to make checkWinCon() to simply return
@@ -105,8 +112,9 @@ document.querySelectorAll(".game-cell").forEach((element) => {
     // gets the id number
     let idNumber = element.id[element.id.length - 1];
     // creates player Object and picks the cell after clicking on it on the DOM. This right now is hardcoded because there is no switching between players states logic
-    const player1 = new Player("player1", "x");
-    player1.createCell(true, idNumber, "player1", "X");
+    const player1 = new Player(players[turn % players.length][0], players[turn % players.length][1]); /*Replaced player1 and x for array of players created earlier, turn will change and shift the array and wrap around once it exceeds its length*/
+    turn += 1; /*to shift player array*/
+    player1.createCell(true, idNumber);
     player1.checkWinCon();
     // debuggin if its returning true
     // console.log(player1.checkWinCon());
