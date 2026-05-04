@@ -42,37 +42,54 @@ class Player {
   checkWinCon() {
     switch ((playerWins = true)) {
       case board[0] === this.player && board[1] === this.player && board[2] === this.player:
+        // We could probably put the switch case stuff in a function so we don;t repeat the code.
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         return true;
         break;
       case board[3] === this.player && board[4] === this.player && board[5] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[6] === this.player && board[7] === this.player && board[8] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[0] === this.player && board[3] === this.player && board[6] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[1] === this.player && board[4] === this.player && board[7] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[2] === this.player && board[5] === this.player && board[8] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[0] === this.player && board[4] === this.player && board[8] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       case board[2] === this.player && board[4] === this.player && board[6] === this.player:
         console.log(`${this.player} wins`);
+        document.getElementById(`display`).innerText = `${this.player} wins`;
         playerWins = true;
+        resetGame();
         break;
       default:
         playerWins = false;
@@ -91,8 +108,16 @@ document.getElementById("game-start-button").addEventListener("click", () => {
   gameInit();
 });
 
+ //Resetting both the board and the cells for now, I think we could defniteley make it so the cell just follow what's ont he board to centralize it though. WOrking on it.
+
+function resetGame (){
+  board = ["cell-0", "cell-1", "cell-2", "cell-3", "cell-4", "cell-5", "cell-6", "cell-7", "cell-8"];
+  document.querySelectorAll(".game-cell").forEach((element) => {element.innerText = " "});
+  
+}
+
 document.getElementById("game-reset-button").addEventListener("click", () => {
-  console.log("Game resets but there is no logic yet");
+    resetGame();
 });
 
 function gameInit() {
